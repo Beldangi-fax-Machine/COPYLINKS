@@ -326,6 +326,9 @@
         </a>
 
         <div class="side-group-label">Drive the tools</div>
+        <a href="#navigate" data-target="navigate">
+          <span class="tile" style="background:#8e8e93"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7a2 2 0 012-2h4l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V7z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span>Move around folders
+        </a>
         <a href="#git-keys" data-target="git-keys">
           <span class="tile" style="background:#ff3b30"><svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="6" r="2.5" stroke="#fff" stroke-width="2"/><circle cx="6" cy="18" r="2.5" stroke="#fff" stroke-width="2"/><circle cx="18" cy="9" r="2.5" stroke="#fff" stroke-width="2"/><path d="M6 8.5v7M6 16l9-5.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>Git keys &amp; help
         </a>
@@ -336,7 +339,15 @@
           <span class="tile" style="background:#af52de"><svg viewBox="0 0 24 24" fill="none"><path d="M5 5h14a1 1 0 011 1v9a1 1 0 01-1 1H9l-4 3.5V6a1 1 0 011-1z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span>Claude commands
         </a>
 
-        <div class="side-group-label">The payoff</div>
+        <div class="side-group-label">Work with GitHub</div>
+        <a href="#clone" data-target="clone">
+          <span class="tile" style="background:#1f883d"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-6.5L2 10h7l3-7z" stroke="#fff" stroke-width="0" fill="#fff"/><path d="M12 16v5M12 21l-4-3M12 21l4-3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="9" r="5" stroke="#fff" stroke-width="2"/></svg></span>Download a repo
+        </a>
+        <a href="#upload" data-target="upload">
+          <span class="tile" style="background:#0a66c2"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20V8M12 8l-4 4M12 8l4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 5h14" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>Upload a folder
+        </a>
+
+        <div class="side-group-label">Run it all together</div>
         <a href="#finale" data-target="finale">
           <span class="tile" style="background:#5856d6"><svg viewBox="0 0 24 24" fill="none"><path d="M13 3L5 13h6l-1 8 8-10h-6l1-8z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span>3 Claudes in tmux
         </a>
@@ -502,6 +513,61 @@ claude --version'><pre><span class="prompt">$ </span>git --version
         </div>
       </section>
 
+      <!-- NAVIGATE FOLDERS -->
+      <section class="step" id="navigate">
+        <div class="step-head">
+          <span class="tile" style="background:#8e8e93"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7a2 2 0 012-2h4l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V7z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span>
+          <h2>Move around folders</h2>
+        </div>
+        <p class="step-sub">The terminal always sits inside one folder. These commands tell you where you are, move you somewhere else, and create new folders to work in.</p>
+
+        <p class="group-label">Look around</p>
+        <div class="card">
+          <table class="keys">
+            <tr><td><code>pwd</code></td><td>Print the folder you're currently in</td></tr>
+            <tr><td><code>ls</code></td><td>List the files and folders here</td></tr>
+            <tr><td><code>ls -la</code></td><td>List everything, including hidden files, with details</td></tr>
+          </table>
+        </div>
+
+        <p class="group-label">Move between folders — <code>cd</code> (change directory)</p>
+        <div class="card">
+          <table class="keys">
+            <tr><td><code>cd Documents</code></td><td>Go into a folder named <code>Documents</code> that's right here</td></tr>
+            <tr><td><code>cd ~/projects</code></td><td>Go to <code>projects</code> in your home folder (<code>~</code> means home)</td></tr>
+            <tr><td><code>cd ..</code></td><td>Go up one level to the parent folder</td></tr>
+            <tr><td><code>cd</code></td><td>Jump straight back to your home folder</td></tr>
+            <tr><td><code>cd -</code></td><td>Return to the folder you were just in</td></tr>
+          </table>
+        </div>
+
+        <p class="group-label">Make new folders — <code>mkdir</code> (make directory)</p>
+        <div class="card">
+          <div class="row">
+            <p class="row-title"><span class="num">1</span> Create a folder</p>
+            <p class="row-desc">This makes a new empty folder named <code>projects</code> inside where you are now.</p>
+            <div class="code" data-raw='mkdir projects'><pre><span class="prompt">$ </span>mkdir projects</pre></div>
+          </div>
+          <div class="row">
+            <p class="row-title"><span class="num">2</span> Make a folder and step into it</p>
+            <p class="row-desc">Create the folder, then <code>cd</code> into it so your next commands run inside it.</p>
+            <div class="code" data-raw='mkdir my-app
+cd my-app'><pre><span class="prompt">$ </span>mkdir my-app
+<span class="prompt">$ </span>cd my-app</pre></div>
+          </div>
+          <div class="row">
+            <p class="row-title"><span class="num">3</span> Create nested folders at once</p>
+            <p class="row-desc"><code>-p</code> builds every folder in the path, even if the parents don't exist yet.</p>
+            <div class="code" data-raw='mkdir -p ~/projects/my-app'><pre><span class="prompt">$ </span>mkdir -p ~/projects/my-app</pre></div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <p>Start typing a folder name and press <kbd>Tab</kbd> — the terminal finishes it for you. Press <kbd>Tab</kbd> twice to see all the matches.</p>
+        </div>
+      </section>
+
       <!-- GIT KEYS -->
       <section class="step" id="git-keys">
         <div class="step-head">
@@ -560,6 +626,23 @@ claude --version'><pre><span class="prompt">$ </span>git --version
           </table>
         </div>
 
+        <p class="group-label">Windows — type the command instead of the shortcut</p>
+        <div class="card">
+          <table class="keys">
+            <tr><td><code>tmux new-window</code></td><td>Create a new window (same as the <kbd>c</kbd> shortcut)</td></tr>
+            <tr><td><code>tmux new-window -n logs</code></td><td>Create a new window already named <code>logs</code></td></tr>
+            <tr><td><code>tmux rename-window api</code></td><td>Rename the current window to <code>api</code></td></tr>
+            <tr><td><code>tmux select-window -t 2</code></td><td>Move to window number <code>2</code></td></tr>
+            <tr><td><code>tmux next-window</code></td><td>Move to the next window</td></tr>
+            <tr><td><code>tmux previous-window</code></td><td>Move to the previous window</td></tr>
+            <tr><td><code>tmux move-window -t 1</code></td><td>Renumber the current window to position <code>1</code></td></tr>
+          </table>
+        </div>
+        <div class="callout">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <p>Every tmux shortcut has a typed command behind it. Run these from a normal shell, or press <kbd>Ctrl</kbd><span class="plus">+</span><kbd>b</kbd> then <kbd>:</kbd> to open tmux's command line and type them without the leading <code>tmux</code>.</p>
+        </div>
+
         <p class="group-label">Panes — split one window into many</p>
         <div class="card">
           <table class="keys">
@@ -616,11 +699,97 @@ claude --version'><pre><span class="prompt">$ </span>git --version
         </div>
       </section>
 
+      <!-- DOWNLOAD A REPO -->
+      <section class="step" id="clone">
+        <div class="step-head">
+          <span class="tile" style="background:#1f883d"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="5" stroke="#fff" stroke-width="2"/><path d="M12 16v5M12 21l-4-3M12 21l4-3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h2>Download a project from GitHub</h2>
+        </div>
+        <p class="step-sub">"Cloning" copies a whole GitHub project — every file and its full history — onto your Mac with one command. Here we download the <strong>caveman</strong> project as an example.</p>
+
+        <div class="card">
+          <div class="row">
+            <p class="row-title"><span class="num">1</span> Go to where you keep projects</p>
+            <p class="row-desc">Make a folder for your projects if you don't have one, then move into it.</p>
+            <div class="code" data-raw='mkdir -p ~/projects
+cd ~/projects'><pre><span class="prompt">$ </span>mkdir -p ~/projects
+<span class="prompt">$ </span>cd ~/projects</pre></div>
+          </div>
+          <div class="row">
+            <p class="row-title"><span class="num">2</span> Clone the project</p>
+            <p class="row-desc">Git downloads it into a new folder named <code>caveman</code> next to you.</p>
+            <div class="code" data-raw='git clone https://github.com/JuliusBrussee/caveman.git'><pre><span class="prompt">$ </span>git clone https://github.com/JuliusBrussee/caveman.git</pre></div>
+          </div>
+          <div class="row">
+            <p class="row-title"><span class="num">3</span> Step into it</p>
+            <p class="row-desc">Now you're inside the project — run <code>ls</code> to see its files, or open it with Claude.</p>
+            <div class="code" data-raw='cd caveman
+ls'><pre><span class="prompt">$ </span>cd caveman
+<span class="prompt">$ </span>ls</pre></div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <p>To grab the latest changes for a project you've already cloned, go into its folder and run <code>git pull</code>.</p>
+        </div>
+      </section>
+
+      <!-- UPLOAD A FOLDER -->
+      <section class="step" id="upload">
+        <div class="step-head">
+          <span class="tile" style="background:#0a66c2"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20V8M12 8l-4 4M12 8l4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 5h14" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <h2>Upload a folder to GitHub</h2>
+        </div>
+        <p class="step-sub">Got a folder on your Mac you want to put online? Turn it into a Git project, create an empty repo on GitHub, then push it up.</p>
+
+        <p class="group-label">On GitHub.com — make an empty repo</p>
+        <div class="card">
+          <div class="row">
+            <p class="row-desc">Go to <strong>github.com</strong> → click <strong>New</strong> → give it a name (e.g. <code>my-app</code>) → click <strong>Create repository</strong>. Don't add a README — leave it empty so the push is clean. Copy the repo URL it shows you.</p>
+          </div>
+        </div>
+
+        <p class="group-label">In Terminal — push your folder up</p>
+        <div class="card">
+          <div class="row">
+            <p class="row-title"><span class="num">1</span> Go into your folder</p>
+            <div class="code" data-raw='cd ~/projects/my-app'><pre><span class="prompt">$ </span>cd ~/projects/my-app</pre></div>
+          </div>
+          <div class="row">
+            <p class="row-title"><span class="num">2</span> Start tracking it and make the first commit</p>
+            <p class="row-desc"><code>git init</code> turns the folder into a project, <code>add</code> stages every file, and <code>commit</code> saves the first snapshot.</p>
+            <div class="code" data-raw='git init
+git add .
+git commit -m "First commit"'><pre><span class="prompt">$ </span>git init
+<span class="prompt">$ </span>git add .
+<span class="prompt">$ </span>git commit -m "First commit"</pre></div>
+          </div>
+          <div class="row">
+            <p class="row-title"><span class="num">3</span> Connect it to your GitHub repo</p>
+            <p class="row-desc">Paste the URL you copied. This links your folder to the empty repo on GitHub.</p>
+            <div class="code" data-raw='git remote add origin https://github.com/your-name/my-app.git'><pre><span class="prompt">$ </span>git remote add origin https://github.com/your-name/my-app.git</pre></div>
+          </div>
+          <div class="row">
+            <p class="row-title"><span class="num">4</span> Push it up</p>
+            <p class="row-desc">Name your main branch and send everything to GitHub. Refresh the GitHub page and your files are there.</p>
+            <div class="code" data-raw='git branch -M main
+git push -u origin main'><pre><span class="prompt">$ </span>git branch -M main
+<span class="prompt">$ </span>git push -u origin main</pre></div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <p>After this first push, saving new changes is just three commands: <code>git add .</code>, <code>git commit -m "what changed"</code>, then <code>git push</code>.</p>
+        </div>
+      </section>
+
       <!-- FINALE -->
       <section class="step" id="finale">
         <div class="step-head">
           <span class="tile" style="background:#5856d6"><svg viewBox="0 0 24 24" fill="none"><path d="M13 3L5 13h6l-1 8 8-10h-6l1-8z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span>
-          <h2>The payoff: three Claudes in one tmux window</h2>
+          <h2>Three Claudes in one tmux window</h2>
         </div>
         <p class="step-sub">Run several Claude Code sessions at once — one per project, or several on the same repo working different tasks. Two ways: the hands-on path so you learn the keys, and a one-shot script once you're comfortable.</p>
 
@@ -676,7 +845,7 @@ claude --version'><pre><span class="prompt">$ </span>git --version
 
         <div class="callout">
           <span class="ico"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <p>That's the whole workflow: <strong>Homebrew</strong> installs your tools, <strong>Git</strong> tracks your work, <strong>tmux</strong> holds the panes open, and three <strong>Claudes</strong> work in parallel. You're set up like a pro.</p>
+          <p><strong>Homebrew</strong> installs your tools, <strong>Git</strong> tracks your work and syncs it with GitHub, <strong>tmux</strong> holds the panes open, and three <strong>Claudes</strong> work in parallel.</p>
         </div>
       </section>
 
